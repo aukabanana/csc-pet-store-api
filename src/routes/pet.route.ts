@@ -9,4 +9,6 @@ router.get('/:id',petController.getOne);
 
 router.post('/',petController.create);
 
+router.put('/:id',petController.update);
+
 export default router;

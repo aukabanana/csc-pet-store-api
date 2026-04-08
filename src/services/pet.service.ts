@@ -37,12 +37,21 @@ export const createPet = (data: Omit<Pet, 'id'>): Pet => {
   return newPet;
 };
 
-// export const updatePet = (id: string, data: Omit<Pet, 'id'>): Pet | null => {
-//   // TODO: Find the index of the pet with this id.
-//   // If not found, return null.
-//   // Replace petStore[index] with { id, ...data } and return the updated pet.
-//   // Hint: petStore.findIndex(...)
-// };
+export const updatePet = (id: string, data: Omit<Pet, 'id'>): Pet | null => {
+  // TODO: Find the index of the pet with this id.
+  // If not found, return null.
+  // Replace petStore[index] with { id, ...data } and return the updated pet.
+  // Hint: petStore.findIndex(...)
+  const index = petStore.findIndex(pet => pet.id === id);
+  if (index === -1) return null;
+  const updatePet: Pet = {
+    id,
+    ...data
+  };
+  petStore[index] = updatePet;
+
+  return updatePet;
+};
 
 // export const deletePet = (id: string): boolean => {
 //   // TODO: Find the index of the pet.
