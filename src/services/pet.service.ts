@@ -14,7 +14,11 @@ export const getAllPets = (species?: string): Pet[] => {
   // TODO: If `species` is provided, return only pets with that species.
   // Otherwise return all pets.
   // Hint: petStore.filter(...)
-  return petStore.filter(()=> true);
+  if(species) {
+    return petStore.filter(pet => pet.species === species);
+  }
+
+  return petStore;
 };
 
 // export const getPetById = (id: string): Pet | undefined => {
