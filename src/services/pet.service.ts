@@ -21,10 +21,11 @@ export const getAllPets = (species?: string): Pet[] => {
   return petStore;
 };
 
-// export const getPetById = (id: string): Pet | undefined => {
-//   // TODO: Find and return the pet whose id matches.
-//   // Hint: petStore.find(...)
-// };
+export const getPetById = (id: string): Pet | undefined => {
+  // TODO: Find and return the pet whose id matches.
+  // Hint: petStore.find(...)
+  return petStore.find(pet => pet.id === id);
+};
 
 // export const createPet = (data: Omit<Pet, 'id'>): Pet => {
 //   // TODO: Create a new Pet object, generate its id with uuidv4(),

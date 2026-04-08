@@ -19,6 +19,14 @@ export const getOne = (req: Request, res: Response): void => {
     // 2. Call petService.getPetById(id)
     // 3. If null/undefined → 404 with { message: 'Pet not found' }
     // 4. Otherwise → 200 with the pet
+    const { id } = req.params;
+    const pet = petService.getPetById(id as string);
+    if (!pet) {
+        res.status(404).json({message: 'Pet not found'});
+        return;
+    }
+
+    res.status(200).json({pet});
 };
 
 export const create = (req: Request, res: Response): void => {

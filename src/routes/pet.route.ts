@@ -5,5 +5,8 @@ const router = Router();
 
 // TODO: Register all five routes.
 router.get('/',petController.getAll);
+router.get('/:id',petController.getOne);
+
+router.post('/',petController.create);
 
 export default router;
