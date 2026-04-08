@@ -22,11 +22,11 @@ export const getOne = (req: Request, res: Response): void => {
     const { id } = req.params;
     const pet = petService.getPetById(id as string);
     if (!pet) {
-        res.status(404).json({message: 'Pet not found'});
+        res.status(404).json({ message: 'Pet not found' });
         return;
     }
 
-    res.status(200).json({pet});
+    res.status(200).json({ pet });
 };
 
 export const create = (req: Request, res: Response): void => {
@@ -36,6 +36,37 @@ export const create = (req: Request, res: Response): void => {
     //    (check for missing fields, invalid species, age >= 0, price > 0, boolean available)
     // 3. Call petService.createPet(...)
     // 4. Send 201 with the new pet
+    const { name, species, age, price, available } = req.body;
+
+    if (!name || !species || age === undefined || price === undefined || available === undefined) {
+        res.status(400).json({ message: 'Missing required fields' });
+        return;
+    }
+
+    if (!petService.isValidSpecies(species)) {
+        res.status(400).json({ message: 'Invalid Species' });
+        return;
+    }
+
+    if (age < 0) {
+        res.status(400).json({ message: 'Age must be greater or equal than 0' });
+        return;
+    }
+
+    if (price <= 0) {
+        res.status(400).json({ message: 'Price must be greater than 0' });
+        return;
+    }
+
+    if (typeof available !== 'boolean') {
+        res.status(400).json({ message: 'Available must be boolean' });
+        return;
+    }
+
+    const newPet = petService.createPet({ name, species, age, price, available });
+
+    res.status(201).json(newPet);
+
 };
 
 export const update = (req: Request, res: Response): void => {

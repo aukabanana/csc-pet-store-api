@@ -14,7 +14,7 @@ export const getAllPets = (species?: string): Pet[] => {
   // TODO: If `species` is provided, return only pets with that species.
   // Otherwise return all pets.
   // Hint: petStore.filter(...)
-  if(species) {
+  if (species) {
     return petStore.filter(pet => pet.species === species);
   }
 
@@ -27,10 +27,15 @@ export const getPetById = (id: string): Pet | undefined => {
   return petStore.find(pet => pet.id === id);
 };
 
-// export const createPet = (data: Omit<Pet, 'id'>): Pet => {
-//   // TODO: Create a new Pet object, generate its id with uuidv4(),
-//   // push it into petStore, and return the new pet.
-// };
+export const createPet = (data: Omit<Pet, 'id'>): Pet => {
+  // TODO: Create a new Pet object, generate its id with uuidv4(),
+  // push it into petStore, and return the new pet.
+  const newPet: Pet = {
+    id: uuidv4(),
+    ...data
+  };
+  return newPet;
+};
 
 // export const updatePet = (id: string, data: Omit<Pet, 'id'>): Pet | null => {
 //   // TODO: Find the index of the pet with this id.
