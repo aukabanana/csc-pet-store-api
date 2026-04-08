@@ -14,7 +14,7 @@ export const getAllPets = (species?: string): Pet[] => {
   // TODO: If `species` is provided, return only pets with that species.
   // Otherwise return all pets.
   // Hint: petStore.filter(...)
-  if (species) {
+  if (species && isValidSpecies(species)) {
     return petStore.filter(pet => pet.species === species);
   }
 
@@ -34,6 +34,9 @@ export const createPet = (data: Omit<Pet, 'id'>): Pet => {
     id: uuidv4(),
     ...data
   };
+
+  petStore.push(newPet);
+
   return newPet;
 };
 
@@ -53,9 +56,15 @@ export const updatePet = (id: string, data: Omit<Pet, 'id'>): Pet | null => {
   return updatePet;
 };
 
-// export const deletePet = (id: string): boolean => {
-//   // TODO: Find the index of the pet.
-//   // If not found, return false.
-//   // Remove it from petStore using splice and return true.
-//   // Hint: petStore.splice(index, 1)
-// };
+export const deletePet = (id: string): boolean => {
+  // TODO: Find the index of the pet.
+  // If not found, return false.
+  // Remove it from petStore using splice and return true.
+  // Hint: petStore.splice(index, 1)
+  const index = petStore.findIndex(pet => pet.id === id);
+
+  if (index === -1) return false;
+
+  petStore.splice(index,1);
+  return true;
+};

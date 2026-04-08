@@ -11,4 +11,6 @@ router.post('/',petController.create);
 
 router.put('/:id',petController.update);
 
+router.delete('/:id',petController.remove);
+
 export default router;
